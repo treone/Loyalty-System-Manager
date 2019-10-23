@@ -1,0 +1,47 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IntelliJ (PyCharm) related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Eclipse related
+.settings/
+.project
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# Visual Studio Code related
+.vscode/
+
+# virtualenv
+.venv
+venv/
+ENV/
+
+# mypy
+.mypy_cache/
+
+# OS junk files
+[Tt]humbs.db
+*.DS_Store
+
+# Office Temp Files
+~$*
+
+# Git merging
+*.orig
+*.bak
+
+# Miscellaneous
+*.lock
+*.swp
+.atom/
+.buildlog/
+.history
+.svn/

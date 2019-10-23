@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="/icons">
+    <file>Material/actions/settings.svg</file>
+    <file>Material/actions/new-box.svg</file>
+    <file>Material/actions/dock-right.svg</file>
+    <file>Material/actions/power.svg</file>
+    <file>Material/actions/information-outline.svg</file>
+    <file>Material/actions/database-check.svg</file>
+  </qresource>
+  <qresource prefix="/">
+    <file>license.txt</file>
+    <file>fonts/roboto.ttf</file>
+    <file>i18n/qtbase_ru.qm</file>
+    <file>images/app.svg</file>
+    <file>images/about_logo.png</file>
+  </qresource>
+</RCC>
