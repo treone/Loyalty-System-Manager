@@ -1,9 +1,7 @@
-# Arkham Horror Decker
-Вторая версия помощника по составлению колод.  
+# Loyalty System Manager
+Простое решение для построения системы лояльности.  
+Разрабатывается для базы клиентов на МИС "Самсон".  
 Разработка ведется на Python 3.7
 
 ## Для работы приложения установите следующие пакеты:
 * pip install PyQt5
-* pip install requests
-* pip install beautifulsoup4
-* pip install markdown
