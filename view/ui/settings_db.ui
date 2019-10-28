@@ -45,7 +45,7 @@
    <item row="1" column="0">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Пользователь</string>
+      <string>Пользователь БД</string>
      </property>
      <layout class="QGridLayout">
       <property name="leftMargin">
@@ -99,7 +99,7 @@
    <item row="0" column="0">
     <widget class="QGroupBox" name="grpServer">
      <property name="title">
-      <string>Сервер</string>
+      <string>Сервер БД</string>
      </property>
      <layout class="QGridLayout">
       <property name="leftMargin">
