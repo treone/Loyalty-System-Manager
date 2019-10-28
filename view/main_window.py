@@ -2,12 +2,11 @@ import webbrowser
 from PyQt5.QtCore import Qt, QByteArray, pyqtSlot, pyqtSignal, QTranslator
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QSizePolicy, QWidget, QToolButton
 from classes import ui_util, constants
-from classes.app import get_app, get_settings
+from classes.app import get_app
 from classes.logger import log
 from classes.version import get_current_version
 
 app = get_app()
-settings = get_settings()
 
 
 class MainWindow(QMainWindow):

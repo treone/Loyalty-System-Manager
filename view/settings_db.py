@@ -1,9 +1,8 @@
 from PyQt5.QtWidgets import QDialog
 from classes import ui_util
-from classes.app import get_app, get_settings
+from classes.app import get_app
 
 app = get_app()
-settings = get_settings()
 
 
 class SettingsDB(QDialog):

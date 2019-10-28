@@ -19,11 +19,6 @@ def get_app():
     return QApplication.instance()
 
 
-def get_settings():
-    """Возвращает текущий объект настроек QApplication"""
-    return QApplication.instance().settings
-
-
 class App(QApplication):
     """
     Класс подготовки главного окна к запуску.
