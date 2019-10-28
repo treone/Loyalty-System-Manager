@@ -1,5 +1,5 @@
 import webbrowser
-from PyQt5.QtCore import Qt, QByteArray, pyqtSlot, pyqtSignal, QTranslator
+from PyQt5.QtCore import Qt, QByteArray, pyqtSlot, pyqtSignal, QTranslator, QFile
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QSizePolicy, QWidget, QToolButton
 from classes import ui_util, constants
 from classes.app import get_app
@@ -121,4 +121,6 @@ class MainWindow(QMainWindow):
         """Отобразить диалог 'Настройки БД'"""
         from view.settings_db import SettingsDB
         win = SettingsDB()
-        win.exec_()
+        dialog = win.exec_()
+        if dialog:
+            win.save_settings()
