@@ -4,11 +4,13 @@ from classes import constants, ui_util
 from classes.app import get_app
 from view.license import License
 
+app = get_app()
+
 
 class About(QDialog):
     """Окно 'О программе'"""
     def __init__(self):
-        QDialog.__init__(self, parent=get_app().main_window)
+        QDialog.__init__(self, parent=app.main_window)
 
         ui_util.load_ui(self, 'about')
         ui_util.init_ui(self)

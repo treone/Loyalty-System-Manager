@@ -3,11 +3,13 @@ from PyQt5.QtWidgets import QDialog
 from classes import ui_util
 from classes.app import get_app
 
+app = get_app()
+
 
 class License(QDialog):
     """Окно 'Лицензия'"""
     def __init__(self):
-        QDialog.__init__(self, parent=get_app().main_window)
+        QDialog.__init__(self, parent=app.main_window)
 
         ui_util.load_ui(self, 'license')
         ui_util.init_ui(self)

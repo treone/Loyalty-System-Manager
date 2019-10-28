@@ -10,6 +10,7 @@ from classes.constants import PATH
 from classes.logger import log
 
 DEFAULT_THEME_NAME = "Material"
+app = get_app()
 
 
 def load_ui(window, ui_name):
@@ -148,6 +149,6 @@ def center(window):
     """Центрирование виджета"""
     log.info('Центрирование окна "{}"'.format(window.windowTitle()))
     frame_gm = window.frameGeometry()
-    center_point = get_app().main_window.frameGeometry().center()
+    center_point = app.main_window.frameGeometry().center()
     frame_gm.moveCenter(center_point)
     window.move(frame_gm.topLeft())
