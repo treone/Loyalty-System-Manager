@@ -13,7 +13,7 @@ def get_current_version():
 
 def _get_version_from_http():
     """Проверяет текущую версию приложения на сайте"""
-    url = constants.APP_SITE + "/version/json/"
+    url = constants.APP_SITE + "/version.json"
 
     try:
         r = requests.get(url, headers={"user-agent": "%s-%s" % (constants.APP_NAME_WITHOUT_SPACES,
