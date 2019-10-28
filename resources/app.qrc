@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/icons">
+    <file>Material/actions/database-settings.svg</file>
     <file>Material/actions/settings.svg</file>
     <file>Material/actions/new-box.svg</file>
     <file>Material/actions/dock-right.svg</file>

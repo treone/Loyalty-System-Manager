@@ -113,7 +113,13 @@ class MainWindow(QMainWindow):
             self.setWindowState(self.not_fullscreen_window_state)
 
     def action_about_trigger(self, event):
-        """Отобразить диалог О программе"""
+        """Отобразить диалог 'О программе'"""
         from view.about import About
         win = About()
+        win.exec_()
+
+    def action_settings_db_trigger(self, event):
+        """Отобразить диалог 'Настройки БД'"""
+        from view.settings_db import SettingsDB
+        win = SettingsDB()
         win.exec_()

@@ -66,6 +66,7 @@
      <string>&amp;Инструменты</string>
     </property>
     <addaction name="action_connect_db"/>
+    <addaction name="action_settings_db"/>
     <addaction name="action_settings"/>
     <addaction name="separator"/>
     <addaction name="action_quit"/>
@@ -91,6 +92,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="action_connect_db"/>
+   <addaction name="action_settings_db"/>
    <addaction name="action_settings"/>
   </widget>
   <widget class="QStatusBar" name="statubar"/>
@@ -271,6 +273,21 @@ QLabel {
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+C</string>
+   </property>
+  </action>
+  <action name="action_settings_db">
+   <property name="icon">
+    <iconset resource="../../resources/app.qrc">
+     <normaloff>:/icons/Material/actions/database-settings.svg</normaloff>:/icons/Material/actions/database-settings.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Настройки &amp;БД</string>
+   </property>
+   <property name="toolTip">
+    <string>Настройки базы данных</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+D</string>
    </property>
   </action>
  </widget>
