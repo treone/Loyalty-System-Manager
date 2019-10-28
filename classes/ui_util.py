@@ -147,7 +147,6 @@ def init_ui(window):
 
 def center(window):
     """Центрирование виджета"""
-    log.info('Центрирование окна "{}"'.format(window.windowTitle()))
     frame_gm = window.frameGeometry()
     center_point = app.main_window.frameGeometry().center()
     frame_gm.moveCenter(center_point)
