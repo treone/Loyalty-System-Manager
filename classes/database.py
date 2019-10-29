@@ -15,15 +15,9 @@ class Database:
     def connect(self):
         self.driver.connect()
 
+    def user_log_in(self, login, password):
+        return self.driver.user_log_in(login, password)
+
     def test(self):
         log.info('Тест подключения к базе данных')
-        self.connect()
-        if self.driver.connection:
-            try:
-                with self.driver.connection.cursor() as cursor:
-                    sql = "SELECT `id`, `password` FROM `Person` WHERE `login`=%s"
-                    cursor.execute(sql, ('админ',))
-                    result = cursor.fetchone()
-                    print(result)
-            finally:
-                self.driver.connection.close()
+        print(self.user_log_in('Админ', '123qwe'))
