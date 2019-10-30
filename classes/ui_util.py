@@ -1,7 +1,7 @@
 import os
 import time
 import xml.etree.ElementTree
-from PyQt5.QtCore import QDir
+from PyQt5.QtCore import QDir, Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
@@ -127,6 +127,11 @@ def connect_auto_events(window, elem, name):
 def init_ui(window):
     """Инициализация всех дочерних виджетов и экшенов окна"""
     log.info('Инициализация пользовательского интерфейса для {} ({})'.format(window.objectName(), window.windowTitle()))
+    flags = window.windowFlags()
+    flag_type = (flags & Qt.WindowType_Mask)
+    if flag_type == Qt.Dialog:
+        flags = Qt.Dialog | Qt.WindowCloseButtonHint | Qt.MSWindowsFixedSizeDialogHint
+        window.setWindowFlags(flags)
 
     try:
         if hasattr(window, 'setWindowTitle') and window.windowTitle() != "":

@@ -26,9 +26,6 @@ class MainWindow(QMainWindow):
         else:
             log.error("Ошибка при установке руссификации интерфейса QT.")
 
-        # Устанавливаем главное окно для ссылки на него во время инициализации потомков
-        app.main_window = self
-
         ui_util.load_ui(self, 'main_window')
         ui_util.init_ui(self)
 
@@ -72,6 +69,7 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event):
         log.info("------------------ Выключение ------------------")
+        app.db.disconnect()
         self.save_window_settings()
         app.processEvents()
         event.accept()

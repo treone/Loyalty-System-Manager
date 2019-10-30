@@ -88,6 +88,10 @@ class App(QApplication):
         from resources import resources
         resources.qInitResources()
 
+        log.info("Создаем объект базы данных")
+        from classes.database import Database
+        App.db = Database()
+
         log.info("Установка темы Fusion")
         self.setStyle(QStyleFactory.create("Fusion"))
 
@@ -104,7 +108,7 @@ class App(QApplication):
 
         log.info("Создаем главное окно приложения")
         from view.main_window import MainWindow
-        MainWindow()
+        App.main_window = MainWindow()
 
         log.info("------------------------------------------------")
         log.info("Инициализация приложения завершена".center(48))

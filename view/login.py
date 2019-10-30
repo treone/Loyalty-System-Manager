@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QDialog, QMessageBox
 from classes import ui_util
 from classes.app import get_app
 from classes.logger import log
@@ -13,9 +13,20 @@ class Login(QDialog):
         ui_util.load_ui(self, 'login')
         ui_util.init_ui(self)
 
-        self.edt_login.setText(app.settings.value("registration/login", ''))
+        login = app.settings.value("registration/login", '')
+        if login:
+            self.edt_login.setText(login)
+            self.edt_password.setFocus()
 
     def accept(self):
         login = self.edt_login.text()
         password = self.edt_password.text()
-        QDialog.accept(self)
+
+        app.settings.setValue("registration/login", login)
+        user_id = app.db.get_user_id(login, password)
+        if user_id:
+            log.info(f'Вход в систему осуществлен с ID: {user_id}')
+            QDialog.accept(self)
+        else:
+            log.warning('Введен неправильный логин или пароль.')
+            QMessageBox.critical(self, "Ошибка входа в систему", "Имя пользователя или пароль неверны.", QMessageBox.Close)
