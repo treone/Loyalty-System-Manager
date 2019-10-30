@@ -29,4 +29,5 @@ class Login(QDialog):
             QDialog.accept(self)
         else:
             log.warning('Введен неправильный логин или пароль.')
-            QMessageBox.critical(self, "Ошибка входа в систему", "Имя пользователя или пароль неверны.", QMessageBox.Close)
+            QMessageBox.critical(self, "Ошибка входа в систему", "Имя пользователя или пароль неверны.",
+                                 QMessageBox.Close)
