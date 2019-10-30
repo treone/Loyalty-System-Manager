@@ -14,7 +14,7 @@ class SettingsDB(QDialog):
         ui_util.load_ui(self, 'settings_db')
         ui_util.init_ui(self)
 
-        self.fill_settings_fields()
+        self._fill_settings_fields()
 
     def save_settings(self):
         log.info("Сохранение настроек подключения к БД.")
