@@ -125,7 +125,9 @@ class MainWindow(QMainWindow):
             win.save_settings()
 
     def action_connect_db_trigger(self, event):
-        """Подключиться к базе"""
-        from classes.database import Database
-        db = Database()
-        db.test()
+        """Регистрация пользователя в системе"""
+        from view.login import Login
+        win = Login()
+        dialog = win.exec_()
+        if dialog:
+            log.info('Пользователь нажал "Ок"')
