@@ -1,5 +1,5 @@
 import webbrowser
-from PyQt5.QtCore import Qt, QByteArray, pyqtSlot, pyqtSignal, QTranslator, QFile
+from PyQt5.QtCore import Qt, QByteArray, pyqtSlot, pyqtSignal, QTranslator
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QSizePolicy, QWidget, QToolButton
 from classes import ui_util, constants
 from classes.app import get_app
@@ -77,14 +77,13 @@ class MainWindow(QMainWindow):
         event.accept()
 
     def action_update_app_trigger(self, event):
-        download_url = constants.APP_SITE + "/download"
         try:
-            webbrowser.open(download_url)
+            webbrowser.open(constants.DOWNLOAD_URL)
             log.info("Успешно открыта страница скачивания новой версии")
         except:
             QMessageBox.warning(self, "Ошибка!", "Не удается открыть страницу загрузки обновления!<br>"
                                                  "Попробуйте сделать это вручную:<br>"
-                                                 "<a href='{url}'>{url}</a>".format(url=download_url))
+                                                 "<a href='{url}'>{url}</a>".format(url=constants.DOWNLOAD_URL))
 
     def restore_window_settings(self):
         """Загрузка настроек размера и положения окна"""

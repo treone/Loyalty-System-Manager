@@ -7,6 +7,7 @@ APP_NAME_ABBR = "LSM"
 APP_NAME_RUS = "Менеджер Системы Лояльности"
 DESCRIPTION = "Простое решение для построения системы лояльности."
 APP_SITE = "http://lpu53.ru/lsm"
+DOWNLOAD_URL = APP_SITE + "/"
 COMPANY = 'ООО "Системная Интеграция"'
 COMPANY_EMAIL = "samson@itnov.ru"
 COPYRIGHT = "Все права защищены. (c) 2018-%s %s" % (datetime.now().year, COMPANY)
