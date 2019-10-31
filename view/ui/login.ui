@@ -40,7 +40,7 @@
       <widget class="QLineEdit" name="edt_login"/>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="edt_password">
+      <widget class="LineEditWithLanguage" name="edt_password">
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
        </property>
@@ -60,6 +60,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LineEditWithLanguage</class>
+   <extends>QLineEdit</extends>
+   <header>view/widgets/line_edit_with_language.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

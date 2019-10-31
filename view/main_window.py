@@ -12,8 +12,6 @@ app = get_app()
 class MainWindow(QMainWindow):
     """Главное окно"""
     found_version_signal = pyqtSignal(str)
-    open_project_signal = pyqtSignal(str)
-    recover_backup_signal = pyqtSignal()
 
     def __init__(self):
         QMainWindow.__init__(self)
@@ -33,13 +31,17 @@ class MainWindow(QMainWindow):
         self.found_version_signal.connect(self.found_current_version)
         get_current_version()
 
-        self.not_fullscreen_window_state = Qt.WindowNoState
+        # Восстановить настройки расположения окна
+        self.not_fullscreen_window_state = Qt.WindowNoState  # Переменная для хранения состояния до входа в полный экран
         self.restore_window_settings()
 
         self.setCorner(Qt.TopLeftCorner, Qt.LeftDockWidgetArea)
         self.setCorner(Qt.BottomLeftCorner, Qt.LeftDockWidgetArea)
         self.setCorner(Qt.TopRightCorner, Qt.RightDockWidgetArea)
         self.setCorner(Qt.BottomRightCorner, Qt.RightDockWidgetArea)
+
+        # После инициализации приложения вызываем окно регистрации пользователя в системе
+        app.app_loading_is_complete.connect(self.action_connect_db_trigger)
 
         self.show()
 
@@ -99,7 +101,8 @@ class MainWindow(QMainWindow):
         app.settings.setValue("Geometry", self.saveGeometry())
         app.settings.setValue("Window State", self.saveState())
 
-    def action_fullscreen_trigger(self, event):
+    @pyqtSlot()
+    def action_fullscreen_trigger(self):
         """Переключить режим полного экрана"""
         if not self.isFullScreen():
             # Сохраняем состояние окна, чтобы можно было вернуться к нему
@@ -108,13 +111,15 @@ class MainWindow(QMainWindow):
         else:
             self.setWindowState(self.not_fullscreen_window_state)
 
-    def action_about_trigger(self, event):
+    @pyqtSlot()
+    def action_about_trigger(self):
         """Отобразить диалог 'О программе'"""
         from view.about import About
         win = About()
         win.exec_()
 
-    def action_settings_db_trigger(self, event):
+    @pyqtSlot()
+    def action_settings_db_trigger(self):
         """Отобразить диалог 'Настройки БД'"""
         from view.settings_db import SettingsDB
         win = SettingsDB()
@@ -122,7 +127,8 @@ class MainWindow(QMainWindow):
         if dialog:
             win.save_settings()
 
-    def action_connect_db_trigger(self, event):
+    @pyqtSlot()
+    def action_connect_db_trigger(self):
         """Регистрация пользователя в системе"""
         from view.login import Login
         win = Login()

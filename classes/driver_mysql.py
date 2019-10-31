@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QMessageBox
 
 from classes.app import get_app
 from classes.logger import log
+from classes.utils import decrypt
 
 app = get_app()
 
@@ -22,12 +23,14 @@ class DatabaseMySQL:
 
     @property
     def connection_settings(self):
+        password = app.settings.value("settings_db/edt_user_password", None)
+        decrypted_password = decrypt(password) if password else ''
         return dict(
             host=app.settings.value("settings_db/server_name", 'localhost'),
             port=app.settings.value("settings_db/server_port", 3306),
             db=app.settings.value("settings_db/database_name", ''),
             user=app.settings.value("settings_db/user_name", ''),
-            password=app.settings.value("settings_db/edt_user_password", ''),
+            password=decrypted_password,
             charset='utf8',
             cursorclass=pymysql.cursors.DictCursor,
         )

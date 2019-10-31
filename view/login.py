@@ -24,10 +24,13 @@ class Login(QDialog):
 
         app.settings.setValue("registration/login", login)
         user_id = app.db.get_user_id(login, password)
+
         if user_id:
             log.info(f'Вход в систему осуществлен с ID: {user_id}')
             QDialog.accept(self)
         else:
             log.warning('Введен неправильный логин или пароль.')
+            self.edt_password.clear()
+            self.edt_password.setFocus()
             QMessageBox.critical(self, "Ошибка входа в систему", "Имя пользователя или пароль неверны.",
                                  QMessageBox.Close)

@@ -2,7 +2,7 @@ import sys
 import locale
 import platform
 import traceback
-from PyQt5.QtCore import QSettings, pyqtSlot, Qt
+from PyQt5.QtCore import QSettings, pyqtSlot, Qt, pyqtSignal
 from PyQt5.QtGui import QFontDatabase, QFont
 from PyQt5.QtWidgets import QApplication, QMessageBox, QStyleFactory
 from PyQt5.QtCore import QT_VERSION_STR, PYQT_VERSION_STR
@@ -23,6 +23,7 @@ class App(QApplication):
     """
     Класс подготовки главного окна к запуску.
     """
+    app_loading_is_complete = pyqtSignal()
 
     def __init__(self, *args):
         QApplication.__init__(self, *args)
@@ -115,6 +116,9 @@ class App(QApplication):
         elapsed_time = time.time() - self.__start_time
         log.info(("Потребовалось времени: %.3f сек" % elapsed_time).center(48))
         log.info("------------------------------------------------")
+
+        # Сигнал о завершении загрузки приложения
+        self.app_loading_is_complete.emit()
 
     @pyqtSlot()
     def on_log_the_end(self):
