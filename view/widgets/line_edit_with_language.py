@@ -13,6 +13,10 @@ class LineEditWithLanguage(QLineEdit):
         self._init_language_detector()
         self.keyboard_layout = get_keyboard_layout()
 
+    def closeEvent(self, event):
+        self.ktd.stop()
+        event.accept()
+
     def _init_language_detector(self):
         # Инициализация и запуск детектора раскладки клавиатуры
         self.ktd = KeyboardLayoutDetector()
@@ -55,6 +59,9 @@ class KeyboardLayoutDetector(QtCore.QThread):
             if current_language != self.previous_language:
                 self.keyboard_layout_changed.emit(current_language)
                 self.previous_language = current_language
+        self.running = False
+
+    def stop(self):
         self.running = False
 
 

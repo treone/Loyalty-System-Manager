@@ -19,7 +19,7 @@ def _get_version_from_http():
 
     try:
         r = requests.get(url, headers={"user-agent": "%s-%s" % (constants.APP_NAME_WITHOUT_SPACES,
-                                                                constants.VERSION)}, verify=False)
+                                                                constants.VERSION)}, verify=False, timeout=5)
         app_version = r.json()["app_version"]
         app.main_window.found_version_signal.emit(app_version)
     except:
