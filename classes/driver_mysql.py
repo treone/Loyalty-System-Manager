@@ -3,6 +3,7 @@ import pymysql
 from PyQt5.QtWidgets import QMessageBox
 
 from classes.app import get_app
+from classes.decorators import with_wait_cursor
 from classes.logger import log
 from classes.utils import decrypt
 
@@ -38,16 +39,19 @@ class DatabaseMySQL:
     def is_open(self):
         return True if self.connection and self.connection.open else False
 
-    def connect(self):
+    @with_wait_cursor
+    def connect(self, settings=None):
+        if settings is None:
+            settings = self.connection_settings
         try:
-            self.connection = pymysql.connect(**self.connection_settings)
+            self.connection = pymysql.connect(**settings)
             self.cursor = self.connection.cursor()
-        except pymysql.err.OperationalError as e:
+        except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
+            app.restoreOverrideCursor()
             log.warning(f'При подключении к базе данных возникла ошибка\n'
                         f'{" "*21}{e.args[1]}\n'
                         f'{" "*21}Код ошибки: {e.args[0]}')
             QMessageBox.critical(app.main_window, "Ошибка!", f"{e.args[1]}", QMessageBox.Close)
-            print(e)
 
     def disconnect_if_needed(self):
         if self.is_open():

@@ -1,6 +1,9 @@
-from PyQt5.QtWidgets import QDialog
+import pymysql
+from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtWidgets import QDialog, QMessageBox
 from classes import ui_util
 from classes.app import get_app
+from classes.database import Database
 from classes.logger import log
 from classes.utils import encrypt, decrypt
 
@@ -16,7 +19,6 @@ class SettingsDB(QDialog):
         ui_util.init_ui(self)
 
         self._fill_settings_fields()
-        # TODO: Доделать кнопку проверить соединение
 
     def save_settings(self):
         log.info("Сохранение настроек подключения к БД.")
@@ -51,3 +53,19 @@ class SettingsDB(QDialog):
     def _set_driver_name(self, driver_name):
         driver_index = drivers.index(driver_name) if driver_name in drivers else 0
         self.cmb_driver_name.setCurrentIndex(driver_index)
+
+    @pyqtSlot()
+    def btn_check_click(self):
+        db = Database(self._driver_name())
+        settings = dict(
+            host=self.edt_server_name.text(),
+            port=self.edt_server_port.value(),
+            db=self.edt_database_name.text(),
+            user=self.edt_user_name.text(),
+            password=self.edt_user_password.text(),
+            charset='utf8',
+            cursorclass=pymysql.cursors.DictCursor,
+        )
+        result = db.connect(settings)
+        if result:
+            QMessageBox.information(self, "Успех!", "Соединение успешно установлено.", QMessageBox.Close)

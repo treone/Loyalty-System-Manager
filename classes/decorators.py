@@ -9,7 +9,6 @@ app = get_app()
 
 def with_wait_cursor(func):
     """Сменить курсор на 'Ожидающий' на время выполнения функции."""
-
     def wrapper(*args, **kwargs):
         app.setOverrideCursor(QCursor(Qt.WaitCursor))
         try:

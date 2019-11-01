@@ -7,21 +7,27 @@ app = get_app()
 
 
 class Database:
-    def __init__(self):
+    def __init__(self, driver_name=None):
         self.driver = None
-        self.driver_init()
+        driver_name = driver_name if driver_name is not None else app.settings.value("settings_db/driver_name", 'mysql')
+        self.driver_init(driver_name)
 
-    def driver_init(self):
-        driver_name = app.settings.value("settings_db/driver_name", 'mysql')
+    def driver_init(self, driver_name):
         if driver_name == 'mysql':
             self.driver = DatabaseMySQL()
+
+    @property
+    def connection_settings(self):
+        """Возвращает настройки соединения"""
+        return self.driver.connection_settings
 
     def is_open(self):
         return self.driver.is_open()
 
-    def connect(self):
+    def connect(self, settings=None):
+        """Подключиться к базе данных"""
         log.info('Подключаемся к базе данных')
-        self.driver.connect()
+        self.driver.connect(settings)
         return self.driver.is_open()
 
     def disconnect(self):
