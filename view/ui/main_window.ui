@@ -25,12 +25,8 @@
     <bool>true</bool>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="4" column="0">
-     <widget class="QTextBrowser" name="client_browser">
-      <property name="readOnly">
-       <bool>false</bool>
-      </property>
-     </widget>
+    <item row="0" column="0">
+     <widget class="QTableView" name="table"/>
     </item>
    </layout>
   </widget>
