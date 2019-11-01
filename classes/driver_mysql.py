@@ -43,6 +43,9 @@ class DatabaseMySQL:
     def connect(self, settings=None):
         if settings is None:
             settings = self.connection_settings
+        else:
+            settings['charset'] = 'utf8'
+            settings['cursorclass'] = pymysql.cursors.DictCursor
         try:
             self.connection = pymysql.connect(**settings)
             self.cursor = self.connection.cursor()

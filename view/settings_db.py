@@ -1,4 +1,3 @@
-import pymysql
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QDialog, QMessageBox
 from classes import ui_util
@@ -63,8 +62,6 @@ class SettingsDB(QDialog):
             db=self.edt_database_name.text(),
             user=self.edt_user_name.text(),
             password=self.edt_user_password.text(),
-            charset='utf8',
-            cursorclass=pymysql.cursors.DictCursor,
         )
         result = db.connect(settings)
         if result:
