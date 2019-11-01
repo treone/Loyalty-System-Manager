@@ -39,7 +39,6 @@ class DatabaseMySQL:
     def connect(self, settings=None):
         if settings is None:
             settings = self.connection_settings
-
         self.connection = QSqlDatabase.addDatabase("QMYSQL")
         self.connection.setHostName(settings["host"])
         self.connection.setPort(settings["port"])

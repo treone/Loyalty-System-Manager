@@ -70,6 +70,12 @@ class App(QApplication):
         except Exception:
             pass
 
+        # TODO: Temp
+        from PyQt5.QtCore import QCoreApplication
+        paths = QCoreApplication.libraryPaths()
+        paths.append("C:/Users/itkondratiev/PycharmProjects/LoyaltySystemManager/resources/libs")
+        self.setLibraryPaths(paths)
+
         log.info("Подключаем сигнал окончания сессии")
         self.aboutToQuit.connect(self.on_log_the_end)
 
