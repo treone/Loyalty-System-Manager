@@ -26,7 +26,7 @@ class Login(QDialog):
         user_id = app.db.get_user_id(login, password)
 
         if user_id:
-            log.info(f'Вход в систему осуществлен с ID: {user_id}')
+            app.user_is_registered.emit(user_id)
             QDialog.accept(self)
         else:
             log.warning('Введен неправильный логин или пароль.')

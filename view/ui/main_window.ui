@@ -147,31 +147,48 @@ QLabel {
    </attribute>
    <widget class="QWidget" name="statistics_layout">
     <layout class="QFormLayout" name="formLayout">
-     <item row="1" column="0">
+     <item row="2" column="0">
       <widget class="QLabel" name="label_selected_customers_count">
        <property name="text">
-        <string>Выбрано клиентов:</string>
+        <string>Выбрано:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="lbl_selected_customers_count">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_suitable_customers_count">
+       <property name="text">
+        <string>Подходящих:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLabel" name="selected_customers_count">
+      <widget class="QLabel" name="lbl_suitable_customers_count">
        <property name="text">
         <string>0</string>
        </property>
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QLabel" name="label_suitable_customers_count">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>Подходит под условие:</string>
+        <string>Пользователь:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLabel" name="suitable_customers_count">
+      <widget class="QLabel" name="lbl_user_fio">
        <property name="text">
-        <string>0</string>
+        <string>Не обнаружен</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

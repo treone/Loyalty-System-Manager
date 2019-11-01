@@ -40,3 +40,8 @@ class Database:
     def get_user_id(self, login, password):
         """Возвращает ID пользователя или False"""
         return self.driver.get_user_id(login, password)
+
+    @with_connection
+    def get_person_fio(self):
+        """Получение Фамилии И.О. пользователя"""
+        return self.driver.get_person_fio()

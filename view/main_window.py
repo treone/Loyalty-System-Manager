@@ -42,6 +42,7 @@ class MainWindow(QMainWindow):
 
         # После инициализации приложения вызываем окно регистрации пользователя в системе
         app.app_loading_is_complete.connect(self.action_connect_db_trigger)
+        app.user_is_registered.connect(self.when_user_is_registered)
 
         self.show()
 
@@ -132,6 +133,11 @@ class MainWindow(QMainWindow):
         """Регистрация пользователя в системе"""
         from view.login import Login
         win = Login()
-        dialog = win.exec_()
-        if dialog:
-            log.info('Пользователь нажал "Ок"')
+        win.exec_()
+
+    @pyqtSlot(int)
+    def when_user_is_registered(self, user_id):
+        # Метод вызывается при регистрации пользователя в системе
+        log.info(f'Вход в систему осуществлен с ID: {user_id}')
+        app.user_id = user_id
+        self.lbl_user_fio.setText(app.db.get_person_fio())

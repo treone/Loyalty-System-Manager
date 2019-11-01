@@ -24,6 +24,7 @@ class App(QApplication):
     Класс подготовки главного окна к запуску.
     """
     app_loading_is_complete = pyqtSignal()
+    user_is_registered = pyqtSignal(int)
 
     def __init__(self, *args):
         QApplication.__init__(self, *args)
@@ -92,6 +93,7 @@ class App(QApplication):
         log.info("Создаем объект базы данных")
         from classes.database import Database
         App.db = Database()
+        App.user_id = None
 
         log.info("Установка темы Fusion")
         self.setStyle(QStyleFactory.create("Fusion"))
