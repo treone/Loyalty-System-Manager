@@ -196,7 +196,7 @@ QLabel {
        <property name="text">
         <string>Не обнаружен</string>
        </property>
-       <property name="wordWrap">
+       <property name="scaledContents">
         <bool>true</bool>
        </property>
       </widget>

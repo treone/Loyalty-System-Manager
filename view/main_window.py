@@ -175,4 +175,4 @@ class MainWindow(QMainWindow):
     @pyqtSlot(float)
     def show_execution_time(self, time=0.0):
         # Метод вызывается для отображения времени выполнения зарпоса
-        self.lbl_execution_time.setText(f'{time:.2f}c')
+        self.lbl_execution_time.setText(f'{time:.1f}c')
