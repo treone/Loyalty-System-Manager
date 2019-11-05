@@ -47,7 +47,10 @@ class DatabaseMySQL:
         self.connection.setPassword(settings["password"])
         connect = self.connection.open()
         if not connect:
-            error = self.connection.lastError().databaseText()
+            database_error = self.connection.lastError().databaseText()
+            driver_error = self.connection.lastError().driverText()
+            error = (f'Database: {database_error}\n'
+                     f'Driver: {driver_error}')
             log.warning(error)
             app.restoreOverrideCursor()
             QMessageBox.critical(app.main_window, "Ошибка!", error, QMessageBox.Close)

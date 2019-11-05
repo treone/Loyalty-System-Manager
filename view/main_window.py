@@ -144,24 +144,28 @@ class MainWindow(QMainWindow):
         self.lbl_user_fio.setText(app.db.get_person_fio())
 
         # TODO: Удалить
-        # Создаем модель
-        sqm = QSqlQueryModel(parent=self)
-        sqm.setQuery('SELECT id, lastName, firstName, patrName, birthDate, sex, notes '
-                     'FROM Client WHERE deleted = 0 AND deathDate IS NULL')
-        # Задаем заголовки для столбцов модели
-        sqm.setHeaderData(1, Qt.Horizontal, 'Фамилия')
-        sqm.setHeaderData(2, Qt.Horizontal, 'Имя')
-        sqm.setHeaderData(3, Qt.Horizontal, 'Отчество')
-        sqm.setHeaderData(4, Qt.Horizontal, 'Дата рождения')
-        sqm.setHeaderData(5, Qt.Horizontal, 'Пол')
-        sqm.setHeaderData(6, Qt.Horizontal, 'Примечание')
-        # Задаем для таблицы только что созданную модель
-        self.clients_table.setModel(sqm)
-        self.clients_table.hideColumn(0)
-        self.clients_table.resizeColumnsToContents()
-        self.clients_table.horizontalHeader().setStretchLastSection(True)
-        self.clients_table.horizontalHeader().setHighlightSections(False)
-        # self.clients_table.verticalHeader().hide()
-        row_count = str(sqm.rowCount())
-        self.lbl_suitable_customers_count.setText(row_count)
-        self.lbl_selected_customers_count.setText(row_count)
+        from classes.decorators import with_wait_cursor
+        @with_wait_cursor
+        def show_demo():
+            # Создаем модель
+            sqm = QSqlQueryModel(parent=self)
+            sqm.setQuery('SELECT id, lastName, firstName, patrName, birthDate, sex, notes '
+                         'FROM Client WHERE deleted = 0 AND deathDate IS NULL')
+            # Задаем заголовки для столбцов модели
+            sqm.setHeaderData(1, Qt.Horizontal, 'Фамилия')
+            sqm.setHeaderData(2, Qt.Horizontal, 'Имя')
+            sqm.setHeaderData(3, Qt.Horizontal, 'Отчество')
+            sqm.setHeaderData(4, Qt.Horizontal, 'Дата рождения')
+            sqm.setHeaderData(5, Qt.Horizontal, 'Пол')
+            sqm.setHeaderData(6, Qt.Horizontal, 'Примечание')
+            # Задаем для таблицы только что созданную модель
+            self.clients_table.setModel(sqm)
+            self.clients_table.hideColumn(0)
+            self.clients_table.resizeColumnsToContents()
+            self.clients_table.horizontalHeader().setStretchLastSection(True)
+            self.clients_table.horizontalHeader().setHighlightSections(False)
+            # self.clients_table.verticalHeader().hide()
+            row_count = str(sqm.rowCount())
+            self.lbl_suitable_customers_count.setText(row_count)
+            self.lbl_selected_customers_count.setText(row_count)
+        show_demo()
