@@ -1,7 +1,5 @@
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QCursor
-from PyQt5.QtWidgets import QMessageBox
-
 from classes.app import get_app
 
 app = get_app()
@@ -26,6 +24,24 @@ def with_connection(func):
             success = app.db.connect()
             if not success:
                 return False
-        return func(*args, **kwargs)
+        result = func(*args, **kwargs)
+        return result
 
     return wrapper
+
+
+def display_execution_time(func):
+    """Декоратор, выводящий время, которое заняло выполнение функции."""
+    import time
+    def wrapper(*args, **kwargs):
+
+        start_time = time.clock()
+        result = func(*args, **kwargs)
+        end_time = time.clock()
+        execution_time = end_time - start_time
+        app.main_window.show_execution_time(execution_time)
+        return result
+
+    return wrapper
+
+

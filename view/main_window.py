@@ -145,7 +145,9 @@ class MainWindow(QMainWindow):
 
         # TODO: Удалить
         from classes.decorators import with_wait_cursor
+        from classes.decorators import display_execution_time
         @with_wait_cursor
+        @display_execution_time
         def show_demo():
             # Создаем модель
             sqm = QSqlQueryModel(parent=self)
@@ -169,3 +171,8 @@ class MainWindow(QMainWindow):
             self.lbl_suitable_customers_count.setText(row_count)
             self.lbl_selected_customers_count.setText(row_count)
         show_demo()
+
+    @pyqtSlot(float)
+    def show_execution_time(self, time=0.0):
+        # Метод вызывается для отображения времени выполнения зарпоса
+        self.lbl_execution_time.setText(f'{time:.2f}c')
