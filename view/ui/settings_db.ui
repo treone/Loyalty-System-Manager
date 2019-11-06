@@ -136,7 +136,7 @@
          <string>&amp;Тип</string>
         </property>
         <property name="buddy">
-         <cstring>cmb_driver_name</cstring>
+         <cstring>cmb_dbms</cstring>
         </property>
        </widget>
       </item>
@@ -161,7 +161,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QComboBox" name="cmb_driver_name">
+       <widget class="QComboBox" name="cmb_dbms">
         <item>
          <property name="text">
           <string>MySQL</string>
@@ -230,7 +230,7 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>cmb_driver_name</tabstop>
+  <tabstop>cmb_dbms</tabstop>
   <tabstop>edt_server_name</tabstop>
   <tabstop>edt_server_port</tabstop>
   <tabstop>edt_database_name</tabstop>

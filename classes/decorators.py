@@ -21,8 +21,8 @@ def with_connection(func):
     """Выполнять функцию необходимо при подключении к базе данных."""
     def wrapper(*args, **kwargs):
         if not app.db.is_open():
-            success = app.db.connect()
-            if not success:
+            app.db.open()
+            if not app.db.is_open:
                 return False
         result = func(*args, **kwargs)
         return result

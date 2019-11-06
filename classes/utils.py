@@ -1,6 +1,22 @@
 import base64
 import random
 import zlib
+from classes.app import get_app
+
+
+def get_connection_settings():
+    """Получить настройки соединения с БД"""
+    app = get_app()
+    password = app.settings.value("settings_db/edt_user_password", None)
+    decrypted_password = decrypt(password) if password else ''
+    return dict(
+        dbms=app.settings.value("settings_db/dbms", 'QMYSQL'),
+        host=app.settings.value("settings_db/server_name", 'localhost'),
+        port=app.settings.value("settings_db/server_port", 3306),
+        db=app.settings.value("settings_db/database_name", ''),
+        user=app.settings.value("settings_db/user_name", ''),
+        password=decrypted_password,
+    )
 
 
 def encrypt(password):
@@ -26,5 +42,5 @@ def encrypt(password):
 def decrypt(password):
     """Расшифровать сохраненный в настройках пароль"""
     if not password.startswith('#1##'):
-        raise ValueError('Ошибка при расшифровке сохраненного пароля.')
+        raise ValueError('Ошибка при расшифровке сохраненного пароля')
     return zlib.decompress(base64.b64decode(password[4:].encode("utf-8"))).decode("utf-8").split('\n', 1)[-1]

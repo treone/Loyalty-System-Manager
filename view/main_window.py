@@ -73,7 +73,7 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event):
         log.info("------------------ Выключение ------------------")
-        app.db.disconnect()
+        app.db.close()
         self.save_window_settings()
         app.processEvents()
         event.accept()

@@ -7,7 +7,7 @@ from classes.logger import log
 from classes.utils import encrypt, decrypt
 
 app = get_app()
-drivers = ['mysql']
+dbms = ['QMYSQL', 'QPSQL']
 
 
 class SettingsDB(QDialog):
@@ -21,7 +21,7 @@ class SettingsDB(QDialog):
 
     def save_settings(self):
         log.info("Сохранение настроек подключения к БД.")
-        app.settings.setValue("settings_db/driver_name", self._driver_name())
+        app.settings.setValue("settings_db/dbms", self._dbms())
         app.settings.setValue("settings_db/server_name", self.edt_server_name.text())
         app.settings.setValue("settings_db/server_port", self.edt_server_port.value())
         app.settings.setValue("settings_db/database_name", self.edt_database_name.text())
@@ -30,14 +30,14 @@ class SettingsDB(QDialog):
         encrypted_password = encrypt(password)
         app.settings.setValue("settings_db/edt_user_password", encrypted_password)
 
-    def _driver_name(self):
-        driver_index = self.cmb_driver_name.currentIndex()
-        return drivers[driver_index]
+    def _dbms(self):
+        driver_index = self.cmb_dbms.currentIndex()
+        return dbms[driver_index]
 
     def _fill_settings_fields(self):
         # Заполняет поля диалогового окна значениями из настроек
         try:
-            self._set_driver_name(app.settings.value("settings_db/driver_name", 'mysql'))
+            self._set_dbms(app.settings.value("settings_db/dbms", 'QMYSQL'))
             self.edt_server_name.setText(app.settings.value("settings_db/server_name", 'localhost'))
             self.edt_server_port.setValue(app.settings.value("settings_db/server_port", 3306))
             self.edt_database_name.setText(app.settings.value("settings_db/database_name", ''))
@@ -49,20 +49,21 @@ class SettingsDB(QDialog):
         except TypeError:
             log.error("Ошибка в сохраненных настройках подключения к БД.")
 
-    def _set_driver_name(self, driver_name):
-        driver_index = drivers.index(driver_name) if driver_name in drivers else 0
-        self.cmb_driver_name.setCurrentIndex(driver_index)
+    def _set_dbms(self, dbms):
+        driver_index = dbms.index(dbms) if dbms in dbms else 0
+        self.cmb_dbms.setCurrentIndex(driver_index)
 
     @pyqtSlot()
     def btn_check_click(self):
-        db = Database(self._driver_name())
         settings = dict(
+            dbms=self._dbms(),
             host=self.edt_server_name.text(),
             port=self.edt_server_port.value(),
             db=self.edt_database_name.text(),
             user=self.edt_user_name.text(),
             password=self.edt_user_password.text(),
         )
-        result = db.connect(settings)
-        if result:
+        db = Database()
+        db.open(settings=settings)
+        if db.is_open():
             QMessageBox.information(self, "Успех!", "Соединение успешно установлено.", QMessageBox.Close)
