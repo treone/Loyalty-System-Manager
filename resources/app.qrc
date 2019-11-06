@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/icons">
+    <file>Material/icons/account.svg</file>
+    <file>Material/icons/lock.svg</file>
     <file>Material/icons/mysql.svg</file>
     <file>Material/icons/postgresql.svg</file>
     <file>Material/actions/database-settings.svg</file>

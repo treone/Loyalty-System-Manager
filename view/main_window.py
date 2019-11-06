@@ -78,15 +78,6 @@ class MainWindow(QMainWindow):
         app.processEvents()
         event.accept()
 
-    def action_update_app_trigger(self, event):
-        try:
-            webbrowser.open(constants.DOWNLOAD_URL)
-            log.info("Успешно открыта страница скачивания новой версии")
-        except:
-            QMessageBox.warning(self, "Ошибка!", "Не удается открыть страницу загрузки обновления!<br>"
-                                                 "Попробуйте сделать это вручную:<br>"
-                                                 "<a href='{url}'>{url}</a>".format(url=constants.DOWNLOAD_URL))
-
     def restore_window_settings(self):
         """Загрузка настроек размера и положения окна"""
         log.info("Загружаем настройки главного окна")
@@ -102,6 +93,16 @@ class MainWindow(QMainWindow):
         log.info("Сохраняем настройки главного окна")
         app.settings.setValue("Geometry", self.saveGeometry())
         app.settings.setValue("Window State", self.saveState())
+
+    @pyqtSlot()
+    def action_update_app_trigger(self):
+        try:
+            webbrowser.open(constants.DOWNLOAD_URL)
+            log.info("Успешно открыта страница скачивания новой версии")
+        except:
+            QMessageBox.warning(self, "Ошибка!", "Не удается открыть страницу загрузки обновления!<br>"
+                                                 "Попробуйте сделать это вручную:<br>"
+                                                 "<a href='{url}'>{url}</a>".format(url=constants.DOWNLOAD_URL))
 
     @pyqtSlot()
     def action_fullscreen_trigger(self):

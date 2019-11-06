@@ -43,7 +43,7 @@ class Database:
             return False
 
     def is_open(self):
-        """Открыто ли соединение с БД?"""
+        """Открыто ли соединение с БД"""
         return True if self.connection and self.connection.isOpen() else False
 
     def close(self):

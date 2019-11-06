@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>284</width>
-    <height>99</height>
+    <height>103</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,30 +19,43 @@
      <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>&amp;Имя</string>
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../../resources/app.qrc">:/icons/Material/icons/account.svg</pixmap>
        </property>
        <property name="buddy">
         <cstring>edt_login</cstring>
        </property>
       </widget>
      </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="edt_login">
+       <property name="placeholderText">
+        <string>Имя</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>&amp;Пароль</string>
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../../resources/app.qrc">:/icons/Material/icons/lock.svg</pixmap>
        </property>
        <property name="buddy">
         <cstring>edt_password</cstring>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="edt_login"/>
-     </item>
      <item row="1" column="1">
       <widget class="LineEditWithLanguage" name="edt_password">
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
+       </property>
+       <property name="placeholderText">
+        <string>Пароль</string>
        </property>
       </widget>
      </item>
@@ -67,7 +80,9 @@
    <header>view/widgets/line_edit_with_language.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../resources/app.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
