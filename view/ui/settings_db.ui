@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>223</width>
-    <height>265</height>
+    <height>302</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -166,6 +166,19 @@
          <property name="text">
           <string>MySQL</string>
          </property>
+         <property name="icon">
+          <iconset resource="../../resources/app.qrc">
+           <normaloff>:/icons/Material/icons/mysql.svg</normaloff>:/icons/Material/icons/mysql.svg</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>PostgreSQL</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../resources/app.qrc">
+           <normaloff>:/icons/Material/icons/postgresql.svg</normaloff>:/icons/Material/icons/postgresql.svg</iconset>
+         </property>
         </item>
        </widget>
       </item>
@@ -224,7 +237,9 @@
   <tabstop>edt_user_name</tabstop>
   <tabstop>edt_user_password</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../resources/app.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>button_box</sender>
