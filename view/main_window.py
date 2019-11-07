@@ -149,7 +149,10 @@ class MainWindow(QMainWindow):
         from classes.decorators import display_execution_time
         @with_wait_cursor
         @display_execution_time
-        def show_demo():
+        def show_demo(self):
+            def test(x):
+                print(len(x))
+
             # Создаем модель
             sqm = QSqlQueryModel(parent=self)
             sqm.setQuery('SELECT id, lastName, firstName, patrName, birthDate, sex, notes '
@@ -167,13 +170,23 @@ class MainWindow(QMainWindow):
             self.clients_table.resizeColumnsToContents()
             self.clients_table.horizontalHeader().setStretchLastSection(True)
             self.clients_table.horizontalHeader().setHighlightSections(False)
-            # self.clients_table.verticalHeader().hide()
-            row_count = str(sqm.rowCount())
-            self.lbl_suitable_customers_count.setText(row_count)
-            self.lbl_selected_customers_count.setText(row_count)
-        show_demo()
+            self.clients_table.verticalHeader().hide()
+            self.clients_table.clearSelection()
+
+            self.lbl_suitable_customers_count.setText(str(sqm.rowCount()))
+
+            self.lbl_selected_customers_count.setText('0')
+            self.clients_table.selectionModel().selectionChanged.connect(self.show_selected_customers_count)
+
+        show_demo(self)
+
+    @pyqtSlot()
+    def show_selected_customers_count(self):
+        # Метод вызывается для отображения выбранных клиентов
+        count = len(self.clients_table.selectionModel().selectedRows())
+        self.lbl_selected_customers_count.setText(str(count))
 
     @pyqtSlot(float)
     def show_execution_time(self, time=0.0):
-        # Метод вызывается для отображения времени выполнения зарпоса
+        # Метод вызывается для отображения времени выполнения запроса
         self.lbl_execution_time.setText(f'{time:.1f}c')
