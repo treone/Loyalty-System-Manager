@@ -156,7 +156,8 @@ class MainWindow(QMainWindow):
             # Создаем модель
             sqm = QSqlQueryModel(parent=self)
             sqm.setQuery('SELECT id, lastName, firstName, patrName, birthDate, sex, notes '
-                         'FROM Client WHERE deleted = 0 AND deathDate IS NULL')
+                         'FROM Client WHERE deleted = 0 AND deathDate IS NULL '
+                         'LIMIT 20')
             # Задаем заголовки для столбцов модели
             sqm.setHeaderData(1, Qt.Horizontal, 'Фамилия')
             sqm.setHeaderData(2, Qt.Horizontal, 'Имя')
@@ -183,6 +184,7 @@ class MainWindow(QMainWindow):
     @pyqtSlot()
     def show_selected_customers_count(self):
         # Метод вызывается для отображения выбранных клиентов
+        print('show_selected_customers_count')
         count = len(self.clients_table.selectionModel().selectedRows())
         self.lbl_selected_customers_count.setText(str(count))
 

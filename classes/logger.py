@@ -25,8 +25,8 @@ class StreamToLogger(object):
         pass
 
 
-logging.basicConfig(format="%(module)12s:%(levelname)s %(message)s", datefmt='%H:%M:%S', level=logging.INFO)
-formatter = logging.Formatter('%(module)12s:%(levelname)s %(message)s')
+logging.basicConfig(format="%(module)14s(%(asctime)s):%(levelname)s %(message)s", level=logging.INFO)
+formatter = logging.Formatter('%(module)14s(%(asctime)s):%(levelname)s %(message)s')
 
 log = logging.getLogger(APP_NAME_WITHOUT_SPACES)
 log.setLevel(logging.INFO)
