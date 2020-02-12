@@ -64,8 +64,8 @@ class App(QApplication):
             log.info("Процессор: %s" % platform.processor())
             log.info("Тип: %s" % platform.machine())
             log.info("Python: %s" % platform.python_version())
-            log.info("Qt5: %s" % QT_VERSION_STR)
-            log.info("PyQt5: %s" % PYQT_VERSION_STR)
+            log.info("Qt: %s" % QT_VERSION_STR)
+            log.info("PyQt: %s" % PYQT_VERSION_STR)
             log.info("------------------------------------------------")
         except Exception:
             pass
